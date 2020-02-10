@@ -1,10 +1,11 @@
 const express = require("express");
-const userRoutes = require('./users');
-const kudoslogRoutes = require('./kudos-logs');
+const { getUsersByOrganizationId } = require('../controllers/user');
+const { getLogs, logKudos } = require('../controllers/kudos-log');
 
 const router = express.Router();
 
-router.use('/user', userRoutes);
-router.use('/kudos-logs', function(req, res, next) {console.log('pop'); next();}, kudoslogRoutes);
+router.get('/user/:orgnizationId', getUsersByOrganizationId);
+router.post('/kudos-logs', logKudos)
+router.get('/kudos-logs/:receiverId', getLogs);
 
 module.exports = router;
