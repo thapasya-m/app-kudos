@@ -9,7 +9,7 @@ module.exports.logKudos = async function(req, res) {
 };
 
 module.exports.getLogs = async function(req, res) {
-  const { receiverId } = req.params;
-  const response = await KudosLog.find({ receiverId });
+  const { id } = req.params;
+  const response = await KudosLog.find({ receiverId: id });
   res.status(200).json({ data: response, error: null });
 };
