@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema({
     default: 3,
     max: 3,
     min: 0
-  }
+  },
+  kudosLastUpdates: Date
 });
 
 const User = mongoose.model("User", userSchema);

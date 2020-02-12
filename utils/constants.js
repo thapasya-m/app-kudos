@@ -16,7 +16,8 @@ function generateRandomUser() {
   return {
     username: faker.internet.userName(),
     password: faker.internet.password(),
-    organizationId: getRandomOrganization()
+    organizationId: getRandomOrganization(),
+    kudosLastUpdated: new Date()
   }
 }
 
