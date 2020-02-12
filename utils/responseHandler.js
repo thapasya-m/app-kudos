@@ -9,3 +9,17 @@ module.exports.errorHandler = function (err, req, res) {
       error: error || 'Some error occured',
     });
 };
+
+module.exports.responseHandler = function (resp, req, res) {
+  const {
+    data, status
+  } = resp;
+  const resStatus = status || 200;
+  return res
+    .status(resStatus)
+    .json({
+      data: data,
+      error: null
+    });
+};
+
