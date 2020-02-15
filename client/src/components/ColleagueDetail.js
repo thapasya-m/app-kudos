@@ -1,9 +1,15 @@
-import {Component} from 'react';
+import React from 'react';
+import Header from './Header';
+import {Link} from 'react-router-dom';
 
-class ColleagueDetail extends Component {
+class ColleagueDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userInfo: {
+        isLoggedIn: true,
+        username: 'yoloer'
+      },
       giverId: '123434324',
     }
   }
@@ -30,7 +36,7 @@ class ColleagueDetail extends Component {
     return (
       <div className='row'>
         <Header
-        value = {this.state}/>
+        value = {this.state.userInfo}/>
         <div>
           My colleagues
           <Link to='/dashboard'>My details</Link>
@@ -39,7 +45,7 @@ class ColleagueDetail extends Component {
                 return (
                     <div>
                       <span name={`${user.username}`}>
-                        {username}
+                        {user.username}
                       </span>
                       <input
                         type='text'
