@@ -1,7 +1,7 @@
 const KudosLog = require("../models/kudos-logs");
 const { 
   errorHandler,
-  responseHandler
+  dataHandler
 } = require("../utils/responseHandler");
 
 module.exports.logKudos = async function(req, res) {
@@ -10,7 +10,7 @@ module.exports.logKudos = async function(req, res) {
     logInfo.receivedOn = new Date();
   
     const response = await KudosLog.create(logInfo);
-    return responseHandler({
+    return dataHandler({
       status: 201,
       data: response,
     }, req, res);
@@ -26,7 +26,7 @@ module.exports.getLogs = async function(req, res) {
   try{
     const { id } = req.params;
     const response = await KudosLog.find({ receiverId: id });
-    return responseHandler({
+    return dataHandler({
       status: 200,
       data: response,
     }, req, res);

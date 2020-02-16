@@ -10,7 +10,7 @@ module.exports.errorHandler = function (err, req, res) {
     });
 };
 
-module.exports.responseHandler = function (resp, req, res) {
+module.exports.dataHandler = function (resp, req, res) {
   const {
     data, status
   } = resp;

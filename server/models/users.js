@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     max: 3,
     min: 0
   },
-  kudosLastUpdates: Date
+  kudosLastUpdated: Date
 });
 
 const User = mongoose.model("User", userSchema);
