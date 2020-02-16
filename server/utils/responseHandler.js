@@ -3,6 +3,12 @@ module.exports.errorHandler = function (err, req, res) {
     error, status
   } = err;
   const resStatus = status || 500;
+  // return res
+  //   .status(resStatus)
+  //   .render('error' , {
+  //     error: error || 'Some error occured',
+  //   })
+
   return res
     .status(resStatus)
     .json({

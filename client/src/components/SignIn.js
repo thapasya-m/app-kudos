@@ -17,6 +17,25 @@ class SignIn extends React.Component {
   handleSignin = (e) => {
     e.preventDefault();
     //sign in to server
+    fetch('http://localhost:4200/auth/signin',{
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      return response.json();
+    }).then(data => {
+      console.log(data);
+      if (data.status > 399) {
+        alert(`Error: ${data.error}`);
+      } else {
+        localStorage.setItem('user', JSON.stringify(data.data));
+        this.props.history.push('/dashboard');
+      }
+    }).catch(err => {
+      alert(`Error: ${err}`)
+    })
   }
 
   render() {
