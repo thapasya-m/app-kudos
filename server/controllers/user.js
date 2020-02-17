@@ -3,14 +3,14 @@ const {
   errorHandler,
   dataHandler
 } = require("../utils/responseHandler");
-const generateRandomUser = require("../utils/constants");
+const { generateRandomUser } = require("../utils/seed-generator");
 
 module.exports.getUsersByOrganizationId = async function(req, res) {
   const { id } = req.params;
   try {
     const response = await User.find({ organizationId: id });
     return dataHandler({
-      data: response,
+      data: response.toClient(),
     }, req, res);
   } catch(err) {
     return errorHandler({

@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  organizationId: {
+  org: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Organization,
+    ref: 'Organization',
     required: true
   },
   kudos: {
@@ -25,6 +25,14 @@ const userSchema = new mongoose.Schema({
   kudosLastUpdated: Date
 });
 
+userSchema.method('toClient', function() {
+  var obj = this.toObject();
+  //Rename fields
+  obj.id = obj._id;
+  delete obj._id;
+  delete obj.__v;
+  return obj;
+});
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

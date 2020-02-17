@@ -32,12 +32,14 @@ module.exports.signin = async function(req, res) {
       response.kudos = DEFAULT_KUDOS;
       await User.updateOne({_id: response._id}, response);
     }
+
+    
     return dataHandler({
       data: {
         username,
         id: response._id,
         kudos: response.kudos,
-        organizationId: response.organizationId
+        org: response.org
       }
     }, req, res);
   }
