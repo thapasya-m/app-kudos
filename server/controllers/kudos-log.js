@@ -2,7 +2,6 @@ const {
   getRandomOrganization,
   generateRandomKudos
 } = require('../utils/seed-generator');
-
 const KudosLog = require("../models/kudos-logs");
 const User = require("../models/users");
 const { 
@@ -32,6 +31,7 @@ module.exports.getLogs = async function(req, res) {
   try{
     const { id } = req.params;
     const response = await KudosLog.find({ receiverId: id });
+
     return dataHandler({
       status: 200,
       data: response.toClient(),
@@ -46,10 +46,8 @@ module.exports.getLogs = async function(req, res) {
 
 module.exports.createLogs = async function(req, res) {
  try {
-   const organizationId = getRandomOrganization();
-   const users = await User.find({ 
-      organizationId,
-      kudos: { $gt : 0 }
+   const org = getRandomOrganization();
+   const users = await User.find({ org, kudos: { $gt : 0 }
     }, '_id').limit(2);
   
     if (users.length < 2) throw new Error('Not enough users');
@@ -57,6 +55,7 @@ module.exports.createLogs = async function(req, res) {
     const [ receiverId, giverId ] = [...users];
     const logInfo = generateRandomKudos(receiverId, giverId);
     const response = await KudosLog.create(logInfo);
+    
     return dataHandler({
       status: 201,
       data: response.toClient(),

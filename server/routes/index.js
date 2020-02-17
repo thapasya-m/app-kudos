@@ -1,15 +1,14 @@
 const express = require("express");
-const { getUsersByOrganizationId, create } = require('../controllers/user');
-const { getLogs, logKudos, createLogs } = require('../controllers/kudos-log');
-const { verifyId } = require('../utils/middlewares');
 const { signin } = require('../controllers/auth');
+
+const userRouter = require('./user');
+const kudosLogRouter = require('./kudos-log');
+
 const router = express.Router();
 
+router.use('/api/user', userRouter);
+router.use('/api/kudos-logs', kudosLogRouter);
+
 router.post('/auth/signin', signin);
-router.get('/api/user/:id', verifyId,  getUsersByOrganizationId);
-router.get('/api/user', create);
-router.get('/api/kudos-logs/:id', getLogs);
-router.post('/api/kudos-logs', logKudos);
-router.get('/api/kudos-logs', createLogs);
 
 module.exports = router;

@@ -8,13 +8,14 @@ const { generateRandomUser } = require("../utils/seed-generator");
 module.exports.getUsersByOrganizationId = async function(req, res) {
   const { id } = req.params;
   try {
-    const response = await User.find({ organizationId: id });
-    return dataHandler({
-      data: response.toClient(),
+    const response = await (await User.find({ org: id }))
+      .map(x => x.toClient());
+    
+      return dataHandler({
+      data: response,
     }, req, res);
   } catch(err) {
     return errorHandler({
-      status: 500,
       error: `Server error: ${err.message}.`,
     }, req, res);
   }
@@ -25,7 +26,7 @@ module.exports.create = async function(req, res) {
     const response = await User.create(generateRandomUser());
     return dataHandler({
       status: 201,
-      data: response,
+      data: response.toClient(),
     }, req, res);
   } catch(err) {
     return errorHandler({
