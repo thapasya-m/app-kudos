@@ -62,7 +62,6 @@ class ColleagueDetail extends React.Component {
     })
       .then(resp => resp.json())
       .then(response => {
-        console.log(response);
         if(response.data) {
           const updatedUser = response.data;
           //update local str & state

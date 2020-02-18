@@ -7,21 +7,22 @@ class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      isLoggedIn: true,
       kudosList:[],
-      user: {}
+      user: {
+        org:''
+      }
     }
   }
 
   componentDidMount() {
     const strData = localStorage.getItem('user');
-    if (!strData) this.props.history.push('/signin');
+    if (!strData) 
+      this.props.history.push('/signin');
     else {
       const user = JSON.parse(strData);
       this.setState({
-        username: user.username
-      })
+        user
+      });
       fetch(`${defaults.BASE_API}/api/kudos-logs/${user.id}`)
       .then(res => {
         return res.json();
@@ -41,14 +42,14 @@ class UserDashboard extends React.Component {
   }
 
   render() {
-    const { kudosList } = this.state;
+    const { kudosList, user } = this.state;
     return (
       <div className='row'>
         <Header 
-        value = {this.state}/>
+        value = {this.state.user}/>
         <div className='container'>
-          <em>organization: ABC</em>
-          <Link to='/colleagues'>See my colleagues</Link>
+          <h3>Organization: {user.org.name}</h3>
+          <h3><Link to='/colleagues'>See my colleagues</Link></h3>
         </div>
         <table>
           <thead>

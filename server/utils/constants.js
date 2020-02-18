@@ -1,9 +1,9 @@
 var mongoose = require("mongoose");
 
 const organizations = [
-  mongoose.Types.ObjectId("5e42cecd1c9d440000328afb"),
-  mongoose.Types.ObjectId("5e42cecd1c9d440000328afc"),
-  mongoose.Types.ObjectId("5e42cecd1c9d440000328afd")
+  "5e4c1719b923181523286e51",
+  "5e4c1712b923181523286e4f",
+  "5e4c1717b923181523286e50",
 ];
 
 module.exports = {

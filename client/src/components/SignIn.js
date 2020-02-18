@@ -26,7 +26,6 @@ class SignIn extends React.Component {
     }).then(response => {
       return response.json();
     }).then(data => {
-      console.log(data);
       if (!data.data) {
         alert(`Error: ${data.error}`);
       } else {

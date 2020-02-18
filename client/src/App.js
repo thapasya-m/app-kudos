@@ -21,7 +21,6 @@ function PrivateRoute({ children, ...rest }) {
   const userInfo = localStorage.getItem("user");
 
   const isAuth = userInfo ? true : false;
-  console.log(userInfo, children);
   return (
     <Route
       {...rest}

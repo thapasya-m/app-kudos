@@ -1,6 +1,7 @@
 const User = require("../models/users");
+const Organization = require("../models/organizations");
 const { errorHandler, dataHandler } = require("../utils/responseHandler");
-const { generateRandomUser } = require("../utils/seed-generator");
+const { generateRandomUser, generateRandomOrganizations } = require("../utils/seed-generator");
 
 module.exports.getUsersByOrganizationId = async function(req, res) {
   const { id } = req.params;
@@ -35,7 +36,7 @@ module.exports.create = async function(req, res) {
     return dataHandler(
       {
         status: 201,
-        data: response.toClient()
+        data: response
       },
       req,
       res

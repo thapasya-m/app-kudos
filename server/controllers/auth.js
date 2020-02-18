@@ -6,7 +6,9 @@ const DEFAULT_KUDOS = 3;
 
 module.exports.signin = async function(req, res) {
   const { username, password } = req.body;
-  const response = await User.findOne({ username });
+  const response = await User
+    .findOne({ username })
+    .populate("org");
 
   if (!response) {
     return errorHandler(

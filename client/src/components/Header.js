@@ -14,8 +14,11 @@ const Header = (props) => {
 
   return (  
     <header className='container-flex-end'>
-      <div>{props.value.username}</div>
-      <button onClick={logout}>Log out</button>
+      <div className='user-info container'>
+        <div>{props.value.username}</div>
+        <button onClick={logout}>Log out</button>
+      </div>
+      
     </header>
   );
 }

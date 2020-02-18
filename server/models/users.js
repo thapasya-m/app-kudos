@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   },
   org: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Organization",
+    ref: Organization,
     required: true
   },
   kudos: {
@@ -34,6 +34,6 @@ userSchema.method("toClient", function() {
   delete obj.password;
   return obj;
 });
-const User = mongoose.model("User", userSchema);
 
+const User = mongoose.model("User", userSchema);
 module.exports = User;

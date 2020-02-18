@@ -26,8 +26,15 @@ function generateRandomKudos(receiverId, giverId) {
   };
 }
 
+function generateRandomOrganizations() {
+  return {
+    name: faker.company.companyName()
+  }
+}
+
 module.exports = {
   generateRandomUser,
   getRandomOrganization,
-  generateRandomKudos
+  generateRandomKudos,
+  generateRandomOrganizations
 };
