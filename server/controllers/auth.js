@@ -6,9 +6,7 @@ const DEFAULT_KUDOS = 3;
 
 module.exports.signin = async function(req, res) {
   const { username, password } = req.body;
-  const response = await User
-    .findOne({ username })
-    .populate("org");
+  const response = await User.findOne({ username }).populate("org");
 
   if (!response) {
     return errorHandler(
@@ -31,29 +29,30 @@ module.exports.signin = async function(req, res) {
       res
     );
   } else {
-    //check if this is first sign-in
-    //of the week, updateDate and kudos
     var now = moment();
-    var input = moment(response.kudosLastUpdated);
-    var isThisWeek = now.week() === input.week();
+    var lastSignedInAt = moment(response.kudosLastUpdated);
+    var isThisWeek = now.week() === lastSignedInAt.week();
 
     if (!isThisWeek) {
       response.kudosLastUpdated = now;
       response.kudos = DEFAULT_KUDOS;
-      await User.updateOne({ _id: response._id }, response);
+      const updatedUser = (await User.updateOne({ _id: response._id 
+        }, response, { new :true })).toClient();
+      return dataHandler(
+        {
+          data: updatedUser
+        },
+        req,
+        res
+      );
+    } else {
+      return dataHandler(
+        {
+          data: response.toClient()
+        },
+        req,
+        res
+      );
     }
-
-    return dataHandler(
-      {
-        data: {
-          username,
-          id: response._id,
-          kudos: response.kudos,
-          org: response.org
-        }
-      },
-      req,
-      res
-    );
   }
 };

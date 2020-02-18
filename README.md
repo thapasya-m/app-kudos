@@ -26,8 +26,8 @@ When running in local, after cloning the repo
   POST http://localhost:4200/auth/signin
 
   {
-    "username": "Samantha_Schuppe",
-    "password": "j2WOL1mpRQyasCy"
+    "username": "Celestine_Bogan",
+    "password": "QEarsM5XBLi83hE"
   }
   ```
 

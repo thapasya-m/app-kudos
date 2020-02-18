@@ -3,7 +3,7 @@ const moment = require("moment");
 const { organizations } = require("./constants");
 
 function getRandomOrganization() {
-  const max = organizations.length - 1;
+  const max = organizations.length;
   const random = Math.floor(Math.random() * max);
   return organizations[random];
 }

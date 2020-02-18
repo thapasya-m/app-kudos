@@ -8,6 +8,6 @@ kudosLogRouter.get("/:id", verifyId, getLogs);
 kudosLogRouter
   .route("/")
   .get(createLogs)
-  .post(logKudos);
+  .post(/* [middleware to authorize this action,] */logKudos);
 
 module.exports = kudosLogRouter;
