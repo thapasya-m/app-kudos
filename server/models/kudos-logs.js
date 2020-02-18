@@ -19,7 +19,7 @@ const kudosLogSchema = new mongoose.Schema({
   receivedOn: Date
 });
 
-kudosLogSchema.method('toClient', function() {
+kudosLogSchema.method("toClient", function() {
   var obj = this.toObject();
   //Rename fields
   obj.id = obj._id;

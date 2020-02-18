@@ -20,10 +20,10 @@ app.use(function(req, res, next) {
 
 app.use("/", router);
 
-app.use(function(req, res, next){
+app.use(function(req, res, next) {
   res.status(404);
   // default to plain-text. send()
-  res.send('Not found');
+  res.send("Not found");
 });
 
 const listener = app.listen(process.env.PORT, function() {

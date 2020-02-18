@@ -1,6 +1,6 @@
 const faker = require("faker");
 const moment = require("moment");
-const {organizations} = require('./constants');
+const { organizations } = require("./constants");
 
 function getRandomOrganization() {
   const max = organizations.length - 1;
@@ -14,7 +14,7 @@ function generateRandomUser() {
     password: faker.internet.password(),
     org: getRandomOrganization(),
     kudosLastUpdated: new Date()
-  }
+  };
 }
 
 function generateRandomKudos(receiverId, giverId) {
@@ -23,11 +23,11 @@ function generateRandomKudos(receiverId, giverId) {
     giverId,
     receivedOn: moment().day(-10),
     message: faker.lorem.sentence(7)
-  }
+  };
 }
 
 module.exports = {
   generateRandomUser,
   getRandomOrganization,
   generateRandomKudos
-}
+};

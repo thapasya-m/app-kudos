@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   },
   org: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Organization',
+    ref: "Organization",
     required: true
   },
   kudos: {
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   kudosLastUpdated: Date
 });
 
-userSchema.method('toClient', function() {
+userSchema.method("toClient", function() {
   var obj = this.toObject();
   //Rename fields
   obj.id = obj._id;
