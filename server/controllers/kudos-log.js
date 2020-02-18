@@ -30,11 +30,15 @@ module.exports.logKudos = async function(req, res) {
 module.exports.getLogs = async function(req, res) {
   try{
     const { id } = req.params;
-    const response = await KudosLog.find({ receiverId: id });
+    const response = (await KudosLog
+      .find({ receiverId: id })
+      .populate('giverId', 'username')
+      )
+      .map(x => x.toClient());
 
     return dataHandler({
       status: 200,
-      data: response.toClient(),
+      data: response,
     }, req, res);
   } catch(err) {
     return errorHandler({

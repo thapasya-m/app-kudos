@@ -6,7 +6,7 @@ const kudosLogRouter = require('./kudos-log');
 
 const router = express.Router();
 
-router.use('/api/user', userRouter);
+router.use('/api/users', userRouter);
 router.use('/api/kudos-logs', kudosLogRouter);
 
 router.post('/auth/signin', signin);

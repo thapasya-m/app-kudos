@@ -8,10 +8,11 @@ const { generateRandomUser } = require("../utils/seed-generator");
 module.exports.getUsersByOrganizationId = async function(req, res) {
   const { id } = req.params;
   try {
-    const response = await (await User.find({ org: id }))
+    const { excludeUser } = req.query;
+    const response = (await User.find({ org: id, _id: { $ne : excludeUser } }))
       .map(x => x.toClient());
     
-      return dataHandler({
+    return dataHandler({
       data: response,
     }, req, res);
   } catch(err) {

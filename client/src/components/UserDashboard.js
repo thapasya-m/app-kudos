@@ -7,7 +7,7 @@ class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'yoloer',
+      username: '',
       isLoggedIn: true,
       kudosList:[],
       user: {}
@@ -19,12 +19,14 @@ class UserDashboard extends React.Component {
     if (!strData) this.props.history.push('/signin');
     else {
       const user = JSON.parse(strData);
-      console.log(defaults.BASE_API);
-      fetch(`${defaults.BASE_API}/api/user/${user.id}`)
+      this.setState({
+        username: user.username
+      })
+      fetch(`${defaults.BASE_API}/api/kudos-logs/${user.id}`)
       .then(res => {
         return res.json();
       }).then(response => {
-        if (response.status > 399) {
+        if (!response.data) {
           alert(`Error: ${response.error}`);
         } else {
           this.setState({
@@ -58,17 +60,20 @@ class UserDashboard extends React.Component {
           </thead>
           <tbody>
             {kudosList.length > 0 ? 
-   kudosList.map(user => 
-    <tr>
-      <td>{user.username}</td>
-      <td>{user.message}</td>
-      <td>{user.dateRecieved}</td>
-    </tr>
-  ) : 
-    <tr>
-      <td colSpan="3">No kudos Received.</td>
-    </tr>         
-  }
+          kudosList.map(user => 
+            {
+              const formatDate = new Date(user.receivedOn).toLocaleDateString();
+            return (<tr key={user.giverId._id}>
+              <td>{user.giverId.username}</td>
+              <td>{user.message}</td>
+              <td>{formatDate}</td>
+            </tr>);
+            }
+          ) : 
+            <tr>
+              <td colSpan="3">No kudos Received.</td>
+            </tr>         
+          }
           </tbody>
         </table>
       </div>

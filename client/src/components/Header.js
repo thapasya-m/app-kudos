@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 const Header = (props) => {
   let history = useHistory();
 
-  if (!props.value.isLoggedIn) {
+  if (!props.value.username) {
     return null;
   }
   const logout = () => {
@@ -14,7 +14,7 @@ const Header = (props) => {
 
   return (  
     <header className='container-flex-end'>
-      <div>I'm {props.value.username}</div>
+      <div>{props.value.username}</div>
       <button onClick={logout}>Log out</button>
     </header>
   );
