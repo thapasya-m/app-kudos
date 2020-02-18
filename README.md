@@ -1,6 +1,10 @@
 # Documenation
 
-## Server side
+## Server side 
+- Server running at 
+```
+https://thapasya-m-app-kudos.glitch.me
+```
 When running in local, after cloning the repo
 
 1. To create dummy users
@@ -50,3 +54,10 @@ POST http://localhost:4200/api/kudos-logs
 cd client/
 npm start
 ```
+- Copy paste following to */src/constants* to run the local server
+```
+{
+  "BASE_API": "http://loca;host:4200"
+}
+```
+
