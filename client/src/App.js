@@ -12,7 +12,7 @@ function App() {
       <Route component={SignIn} path="/signin"/>
       <PrivateRoute component={UserDashboard} path="/dashboard"/> 
       <PrivateRoute component={ColleagueDetail} path="/colleagues"/> 
-      <Route path="*" render={() => <Redirect to="/dashboard"/>}/>
+      <Route path="*" render={() => <Redirect to="/signin"/>}/>
     </Switch>
   );
 }

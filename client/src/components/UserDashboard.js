@@ -20,7 +20,7 @@ class UserDashboard extends React.Component {
     else {
       const user = JSON.parse(strData);
       console.log(defaults.BASE_API);
-      fetch(`${defaults.BASE_API}/api/kudos-logs/${user.organizationId}`)
+      fetch(`${defaults.BASE_API}/api/user/${user.id}`)
       .then(res => {
         return res.json();
       }).then(response => {
@@ -44,8 +44,8 @@ class UserDashboard extends React.Component {
       <div className='row'>
         <Header 
         value = {this.state}/>
-        <div>
-          organization: ABC
+        <div className='container'>
+          <em>organization: ABC</em>
           <Link to='/colleagues'>See my colleagues</Link>
         </div>
         <table>
@@ -57,19 +57,18 @@ class UserDashboard extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {kudosList.map(user => 
-              <tr>
-                <td>{user.username}</td>
-                <td>{user.message}</td>
-                <td>{user.dateRecieved}</td>
-              </tr>
-            )}
-            
-            {/* <tr>
-              <td>curlyDreams</td>
-              <td>ui</td>
-              <td>good memo!</td>
-            </tr> */}
+            {kudosList.length > 0 ? 
+   kudosList.map(user => 
+    <tr>
+      <td>{user.username}</td>
+      <td>{user.message}</td>
+      <td>{user.dateRecieved}</td>
+    </tr>
+  ) : 
+    <tr>
+      <td colSpan="3">No kudos Received.</td>
+    </tr>         
+  }
           </tbody>
         </table>
       </div>

@@ -40,6 +40,16 @@ td, th {
   padding: 8px;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.container-flex-end {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

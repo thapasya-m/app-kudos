@@ -27,7 +27,7 @@ class SignIn extends React.Component {
       return response.json();
     }).then(data => {
       console.log(data);
-      if (data.status > 399) {
+      if (!data.data) {
         alert(`Error: ${data.error}`);
       } else {
         localStorage.setItem('user', JSON.stringify(data.data));
