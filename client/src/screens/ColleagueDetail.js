@@ -1,7 +1,8 @@
 import React from "react";
-import Header from "./Header";
+import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import defaults from "../constants.json";
+import UserDetail from "../components/UserDetailList";
 
 class ColleagueDetail extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class ColleagueDetail extends React.Component {
         id: "",
         kudos: 0
       },
-      colleagues: []
+      colleagues: [],
+      error: ''
     };
   }
 
@@ -24,13 +26,15 @@ class ColleagueDetail extends React.Component {
       this.setState({
         user
       });
-      fetch(`${defaults.BASE_API}/api/users/${user.org}?excludeUser=${user.id}`)
+      fetch(`${defaults.BASE_API}/api/users/${user.org._id}?excludeUser=${user.id}`)
         .then(res => {
           return res.json();
         })
         .then(response => {
           if (response.error) {
-            alert(`Error: ${response.error}`);
+            this.setState({
+              error: response.error
+            });
           } else {
             this.setState({
               colleagues: response.data
@@ -38,7 +42,9 @@ class ColleagueDetail extends React.Component {
           }
         })
         .catch(err => {
-          alert(`Error: ${err}`);
+          this.setState({
+            error: err
+          });
         });
     }
   }
@@ -46,6 +52,9 @@ class ColleagueDetail extends React.Component {
   handleClick = (user, e) => {
     e.preventDefault();
 
+    this.setState({
+      error: ''
+    });
     const message = document.querySelector(`input[name = '${user.username}']`).value;
     const log = {
       receiverId: user.id,
@@ -64,7 +73,6 @@ class ColleagueDetail extends React.Component {
       .then(response => {
         if(response.data) {
           const updatedUser = response.data;
-          //update local str & state
           localStorage.setItem('user', JSON.stringify(updatedUser));
           this.setState({
             user: updatedUser
@@ -72,12 +80,15 @@ class ColleagueDetail extends React.Component {
         }
       })
       .catch(err => {
-        alert(`Error: ${err}`);
+        this.setState({
+          error: err
+        });
       });
   };
 
   render() {
-    const { colleagues, user } = this.state;
+    const { colleagues, user, error } = this.state;
+    const allowSendKudos = user.kudos > 0 ? true: false;
     return (
       <div className="row">
         <Header value={user} />
@@ -85,21 +96,12 @@ class ColleagueDetail extends React.Component {
           <b>My colleagues</b>
           <Link to="/dashboard">My details</Link>
         </div>
-        {colleagues.map(({ id, username }) => {
-          return (
-            <div key={id}>
-              <span>{username}</span>
-              <input
-                type="text"
-                name={`${username}`}
-                placeholder="Enter a message"
-              />
-              <button onClick={e => this.handleClick({ id, username }, e)} disabled={user.kudos === 0}>
-                Send Kudos!
-              </button>
-            </div>
-          );
-        })}
+        <UserDetail
+          handleBtnClick={this.handleClick} 
+          value={{userList: colleagues, allowSendKudos}}
+        />
+        {error !== '' 
+        && <h3 className='error-message'>{error}</h3>}
       </div>
     );
   }

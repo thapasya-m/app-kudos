@@ -1,23 +1,29 @@
 import React from 'react';
+import defaults from "../constants.json";
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password:''
+      creds: {
+        username: '',
+        password:''
+      },
+      error: ''
     }
   }
 
   handleChange = ({target}) => {
     this.setState({
-      [target.name] : target.value
+      [target.name] : target.value,
+      error : ''
     })
   }
+
   handleSignin = (e) => {
     e.preventDefault();
-    //sign in to server
-    fetch('http://localhost:4200/auth/signin',{
+
+    fetch(`${defaults.BASE_API}/auth/signin`,{
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
@@ -26,8 +32,10 @@ class SignIn extends React.Component {
     }).then(response => {
       return response.json();
     }).then(data => {
-      if (!data.data) {
-        alert(`Error: ${data.error}`);
+      if (data.error) {
+        this.setState({
+          error: data.error
+        })
       } else {
         localStorage.setItem('user', JSON.stringify(data.data));
         this.props.history.push('/dashboard');
@@ -38,6 +46,7 @@ class SignIn extends React.Component {
   }
 
   render() {
+    const { error } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSignin}>
@@ -52,6 +61,8 @@ class SignIn extends React.Component {
           </label>
           <input type='submit' value='sign in'/>
         </form>
+        {error !== '' 
+        && <h3 className='error-message'>{error}</h3>}
       </div>
     );
   }

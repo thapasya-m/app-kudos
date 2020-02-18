@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
+import Header from "../components/Header";
 import defaults from '../constants.json';
 
 class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error:'',
       kudosList:[],
       user: {
         org:''
@@ -28,21 +29,25 @@ class UserDashboard extends React.Component {
         return res.json();
       }).then(response => {
         if (!response.data) {
-          alert(`Error: ${response.error}`);
+          this.setState({
+            error: response.error
+          });
         } else {
           this.setState({
             kudosList: response.data
           });
         }
       }).catch(err => {
-        alert(`Error: ${err}`)
+        this.setState({
+          error: err
+        })
       })
     }
     
   }
 
   render() {
-    const { kudosList, user } = this.state;
+    const { kudosList, user, error } = this.state;
     return (
       <div className='row'>
         <Header 
@@ -77,6 +82,8 @@ class UserDashboard extends React.Component {
           }
           </tbody>
         </table>
+        {error !== '' 
+        && <h3 className='error-message'>{error}</h3>}
       </div>
     );
   }

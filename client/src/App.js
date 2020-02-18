@@ -2,9 +2,9 @@ import React from "react";
 import "./App.css";
 
 import { Route, Switch, Redirect } from "react-router-dom";
-import UserDashboard from "./components/UserDashboard";
-import ColleagueDetail from "./components/ColleagueDetail";
-import SignIn from "./components/SignIn";
+import UserDashboard from "./screens/UserDashboard";
+import ColleagueDetail from "./screens/ColleagueDetail";
+import SignIn from "./screens/SignIn";
 
 function App() {
   return (

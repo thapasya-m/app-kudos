@@ -18,7 +18,6 @@ const Header = (props) => {
         <div>{props.value.username}</div>
         <button onClick={logout}>Log out</button>
       </div>
-      
     </header>
   );
 }
