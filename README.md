@@ -1,27 +1,52 @@
-Welcome to Glitch
-=================
+# Documenation
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+## Server side
+When running in local, after cloning the repo
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+1. To create dummy users
+  ```
+  GET http://localhost:4200/api/users
+  ```
 
-Find out more [about Glitch](https://glitch.com/about).
+2. To create dummy kudos
+  ```
+  GET http://localhost:4200/api/kudos-logs
+  ```
 
+>*Note: By default 3 organizations have been used throughout the app*
 
-Your Project
-------------
+### Other API Calls
 
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
+1. To Sign in
+  ```
+  POST http://localhost:4200/auth/signin
 
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+  {
+    "username": "Samantha_Schuppe",
+    "password": "j2WOL1mpRQyasCy"
+  }
+  ```
 
+2. To get all users in an organization (except signed in user)
+  ```
+  GET http://localhost:4200/api/users/{organizationId}?excludeUser=userId
+  ```
 
-Made by [Glitch](https://glitch.com/)
--------------------
+3. To give a colleague a kudo (with message)
+```
+POST http://localhost:4200/api/kudos-logs
+ 
+{
+  "receiverId": "5e4ad29d04a159132474046a",
+  "message": "good job!!",
+  "giverId": "5e4ad1581628ae125abc0caf"
+}
+```
 
-\ ゜o゜)ノ
+## Client side
+
+- To Start the app
+```
+cd client/
+npm start
+```

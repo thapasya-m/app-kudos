@@ -12,10 +12,17 @@ module.exports.logKudos = async function(req, res) {
     logInfo.receivedOn = new Date();
 
     const response = await KudosLog.create(logInfo);
+    const userUpdate = (await User.findOneAndUpdate(
+      { _id: logInfo.giverId },
+      { $inc: {'kudos': -1}},
+      { new: true }
+      )).toClient();
+
+    console.log(userUpdate);
     return dataHandler(
       {
         status: 201,
-        data: response.toClient()
+        data: userUpdate
       },
       req,
       res

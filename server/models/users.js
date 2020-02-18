@@ -31,6 +31,7 @@ userSchema.method("toClient", function() {
   obj.id = obj._id;
   delete obj._id;
   delete obj.__v;
+  delete obj.password;
   return obj;
 });
 const User = mongoose.model("User", userSchema);

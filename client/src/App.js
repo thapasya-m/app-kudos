@@ -1,25 +1,25 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import { Route, Switch, Redirect } from 'react-router-dom';
-import UserDashboard from './components/UserDashboard';
-import ColleagueDetail from './components/ColleagueDetail';
-import SignIn from './components/SignIn';
+import { Route, Switch, Redirect } from "react-router-dom";
+import UserDashboard from "./components/UserDashboard";
+import ColleagueDetail from "./components/ColleagueDetail";
+import SignIn from "./components/SignIn";
 
 function App() {
   return (
     <Switch>
-      <Route component={SignIn} path="/signin"/>
-      <PrivateRoute component={UserDashboard} path="/dashboard"/> 
-      <PrivateRoute component={ColleagueDetail} path="/colleagues"/> 
-      <Route path="*" render={() => <Redirect to="/signin"/>}/>
+      <Route component={SignIn} path="/signin" />
+      <PrivateRoute component={UserDashboard} path="/dashboard" />
+      <PrivateRoute component={ColleagueDetail} path="/colleagues" />
+      <Route path="*" render={() => <Redirect to="/signin" />} />
     </Switch>
   );
 }
 
-function PrivateRoute({ children, ...rest}) {
-  const userInfo = localStorage.getItem('user');
-  
+function PrivateRoute({ children, ...rest }) {
+  const userInfo = localStorage.getItem("user");
+
   const isAuth = userInfo ? true : false;
   console.log(userInfo, children);
   return (
@@ -31,7 +31,7 @@ function PrivateRoute({ children, ...rest}) {
         ) : (
           <Redirect
             to={{
-              pathname: "/signin",
+              pathname: "/signin"
             }}
           />
         )
