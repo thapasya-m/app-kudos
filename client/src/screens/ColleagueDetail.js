@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
 import defaults from "../constants.json";
 import UserDetail from "../components/UserDetailList";
+import Title from "../components/Title";
 
 class ColleagueDetail extends React.Component {
   constructor(props) {
@@ -92,10 +92,10 @@ class ColleagueDetail extends React.Component {
     return (
       <div className="row">
         <Header value={user} />
-        <div className="container">
-          <b>My colleagues</b>
-          <Link to="/dashboard">My details</Link>
-        </div>
+        <Title value={{
+          title: 'My colleagues',
+          linkTo: 'dashboard'
+        }}/>
         <UserDetail
           handleBtnClick={this.handleClick} 
           value={{userList: colleagues, allowSendKudos}}

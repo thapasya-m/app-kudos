@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import defaults from '../constants.json';
+import Title from "../components/Title";
 
 class UserDashboard extends React.Component {
   constructor(props) {
@@ -52,10 +53,10 @@ class UserDashboard extends React.Component {
       <div className='row'>
         <Header 
         value = {this.state.user}/>
-        <div className='container'>
-          <h3>Organization: {user.org.name}</h3>
-          <h3><Link to='/colleagues'>See my colleagues</Link></h3>
-        </div>
+        <Title value={{
+          title: `Organization: ${user.org.name}`,
+          linkTo: 'colleagues'
+        }}/>
         <table>
           <thead>
             <tr>
