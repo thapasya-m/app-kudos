@@ -1,10 +1,11 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Header = (props) => {
   let history = useHistory();
+  const { value } = props;
 
-  if (!props.value.username) {
+  if (!value.username) {
     return null;
   }
   const logout = () => {
@@ -15,7 +16,7 @@ const Header = (props) => {
   return (  
     <header className='container-flex-end'>
       <div className='user-info container'>
-        <div>{props.value.username} (Kudos Left:{props.value.kudos})</div>
+        <div>{value.username} (Kudos Left:{value.kudos})</div>
         <button onClick={logout}>Log out</button>
       </div>
     </header>
