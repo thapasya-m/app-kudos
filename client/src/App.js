@@ -11,8 +11,12 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route component={SignIn} path="/signin" />
-        <PrivateRoute component={UserDashboard} path="/dashboard" />
-        <PrivateRoute component={ColleagueDetail} path="/colleagues" />
+        <PrivateRoute path="/dashboard">
+          <UserDashboard />
+        </PrivateRoute> />
+        <PrivateRoute path="/colleagues">
+          <ColleagueDetail />
+        </PrivateRoute>/>
         <Route path="*" render={() => <Redirect to="/signin" />} />
       </Switch>
     </BrowserRouter>
@@ -26,7 +30,7 @@ function PrivateRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={(renderProps) =>
         isAuth ? (
           children
         ) : (
