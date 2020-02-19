@@ -15,7 +15,7 @@ const Header = (props) => {
   return (  
     <header className='container-flex-end'>
       <div className='user-info container'>
-        <div>{props.value.username}</div>
+        <div>{props.value.username} (Kudos Left:{props.value.kudos})</div>
         <button onClick={logout}>Log out</button>
       </div>
     </header>
