@@ -16,7 +16,7 @@ module.exports.logKudos = async function(req, res) {
       { _id: logInfo.giverId },
       { $inc: {'kudos': -1}},
       { new: true }
-      )).toClient();
+      ).populate("org")).toClient();
 
     return dataHandler(
       {
