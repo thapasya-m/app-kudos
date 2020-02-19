@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import defaults from '../constants.json';
 import Title from "../components/Title";
@@ -67,10 +66,10 @@ class UserDashboard extends React.Component {
           </thead>
           <tbody>
             {kudosList.length > 0 ? 
-          kudosList.map(user => 
+          kudosList.map((user, index) => 
             {
               const formatDate = new Date(user.receivedOn).toLocaleDateString();
-            return (<tr key={user.giverId._id}>
+            return (<tr key={`${user.giverId._id}_${index}`}>
               <td>{user.giverId.username}</td>
               <td>{user.message}</td>
               <td>{formatDate}</td>

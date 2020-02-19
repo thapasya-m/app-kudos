@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import defaults from "../constants.json";
 import UserDetail from "../components/UserDetailList";
 import Title from "../components/Title";
+import ErrorMsg from "../components/ErrorMsg";
 
 class ColleagueDetail extends React.Component {
   constructor(props) {
@@ -100,8 +101,7 @@ class ColleagueDetail extends React.Component {
           handleBtnClick={this.handleClick} 
           value={{userList: colleagues, allowSendKudos}}
         />
-        {error !== '' 
-        && <h3 className='error-message'>{error}</h3>}
+        <ErrorMsg value={error}/>
       </div>
     );
   }

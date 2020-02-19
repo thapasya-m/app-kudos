@@ -13,19 +13,24 @@ module.exports.logKudos = async function(req, res) {
 
     await KudosLog.create(logInfo);
     const userUpdate = (await User.findOneAndUpdate(
-      { _id: logInfo.giverId },
+      { _id: logInfo.giverId, kudos: { $gt: 0 } },
       { $inc: {'kudos': -1}},
-      { new: true }
-      ).populate("org")).toClient();
+      { new: true }).populate("org"));
+    
+    if (!userUpdate)
+      return errorHandler(
+        {
+          status: 400,
+          error: `The user have exhausted their kudos.`
+        },
+        req,
+        res
+      );
+    
+      return dataHandler({
+        data: userUpdate.toClient()
+      },req, res);
 
-    return dataHandler(
-      {
-        status: 201,
-        data: userUpdate
-      },
-      req,
-      res
-    );
   } catch (err) {
     return errorHandler(
       {
@@ -86,9 +91,7 @@ module.exports.createLogs = async function(req, res) {
       res
     );
   } catch (err) {
-    return errorHandler(
-      {
-        status: 500,
+    return errorHandler({
         error: `Server error: ${err.message}.`
       },
       req,

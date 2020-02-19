@@ -5,6 +5,11 @@ dotenv.config();
 
 const uri = process.env.MONGODB_URI;
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect(uri, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true, 
+  useCreateIndex: true,
+  useFindAndModify:true
+ });
 
 module.exports = mongoose;

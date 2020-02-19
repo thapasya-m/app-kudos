@@ -1,5 +1,6 @@
 import React from 'react';
 import defaults from "../constants.json";
+import ErrorMsg from '../components/ErrorMsg.js';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -61,8 +62,7 @@ class SignIn extends React.Component {
           </label>
           <input type='submit' value='sign in'/>
         </form>
-        {error !== '' 
-        && <h3 className='error-message'>{error}</h3>}
+        <ErrorMsg value={error}/>
       </div>
     );
   }
