@@ -36,13 +36,15 @@ class SignIn extends React.Component {
       if (data.error) {
         this.setState({
           error: data.error
-        })
+        });
       } else {
         localStorage.setItem('user', JSON.stringify(data.data));
         this.props.history.push('/dashboard');
       }
     }).catch(err => {
-      alert(`Error: ${err}`)
+      this.setState({
+        error: err
+      });
     })
   }
 

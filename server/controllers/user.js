@@ -1,6 +1,6 @@
 const User = require("../models/users");
 const { errorHandler, dataHandler } = require("../utils/responseHandler");
-const { generateRandomUser, generateRandomOrganizations } = require("../utils/seed-generator");
+const { generateRandomUser } = require("../utils/seed-generator");
 
 module.exports.getUsersByOrganizationId = async function(req, res) {
   const { id } = req.params;

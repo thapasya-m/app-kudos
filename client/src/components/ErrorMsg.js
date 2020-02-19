@@ -1,11 +1,11 @@
 import React from 'react';
 
 const ErrorMsg = ({ value }) => {
-  if (value.error === '') {
+  if (value === '') {
     return null;
   }
   return(
-    <h3 className='error-message'>{value.error}</h3>
+    <h3 className='error-message'>{value}</h3>
   );
 }
 
