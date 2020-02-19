@@ -13,10 +13,10 @@ function App() {
         <Route component={SignIn} path="/signin" />
         <PrivateRoute path="/dashboard">
           <UserDashboard />
-        </PrivateRoute> />
+        </PrivateRoute>
         <PrivateRoute path="/colleagues">
           <ColleagueDetail />
-        </PrivateRoute>/>
+        </PrivateRoute>
         <Route path="*" render={() => <Redirect to="/signin" />} />
       </Switch>
     </BrowserRouter>
