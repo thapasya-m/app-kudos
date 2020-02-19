@@ -1,19 +1,21 @@
 import React from "react";
 import "./App.css";
 
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import UserDashboard from "./screens/UserDashboard";
 import ColleagueDetail from "./screens/ColleagueDetail";
 import SignIn from "./screens/SignIn";
 
 function App() {
   return (
-    <Switch>
-      <Route component={SignIn} path="/signin" />
-      <PrivateRoute component={UserDashboard} path="/dashboard" />
-      <PrivateRoute component={ColleagueDetail} path="/colleagues" />
-      <Route path="*" render={() => <Redirect to="/signin" />} />
-    </Switch>
+    <BrowserRouter>
+      <Switch>
+        <Route component={SignIn} path="/signin" />
+        <PrivateRoute component={UserDashboard} path="/dashboard" />
+        <PrivateRoute component={ColleagueDetail} path="/colleagues" />
+        <Route path="*" render={() => <Redirect to="/signin" />} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
