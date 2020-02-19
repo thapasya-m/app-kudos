@@ -48,14 +48,14 @@ class SignIn extends React.Component {
   render() {
     const { error } = this.state;
     return (
-      <div>
+      <div className='container padding'>
         <form onSubmit={this.handleSignin}>
-          <label name='username'>
+          <label name='username' className='padding'>
             <input onChange={this.handleChange}
             name='username'
             type='text' placeholder='Enter username'/>
           </label>
-          <label name='password'>
+          <label name='password' className='padding'>
             <input onChange={this.handleChange} name='password'
             type='password' placeholder='Enter password'/>
           </label>
