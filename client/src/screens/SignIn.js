@@ -14,6 +14,10 @@ class SignIn extends React.Component {
     }
   }
 
+  componentDidMount() {
+    localStorage.removeItem('user');
+  }
+  
   handleChange = ({target}) => {
     this.setState({
       [target.name] : target.value,

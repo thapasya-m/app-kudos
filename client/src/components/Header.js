@@ -1,25 +1,31 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Header = (props) => {
-  let history = useHistory();
-  const { value } = props;
+const Header = ( props) => {
+const {value } = props;
 
   if (!value.username) {
     return null;
   }
-  const logout = () => {
-    localStorage.clear();
-    history.push("/");
-  }
 
   return (  
     <header className='container-flex-end'>
-      <div className='user-info container'>
-        <div>{value.username} (Kudos Left:{value.kudos})</div>
-        <button onClick={logout}>Log out</button>
-      </div>
+      <section className='user-info container'>
+        <span>{value.username} (Kudos Left:{value.kudos})</span>
+        <button>
+          <Link to='/sign-in'>Log out</Link>
+        </button>
+      </section>
     </header>
   );
 }
+
+Header.protoTypes = {
+  value: PropTypes.shape({
+    username: PropTypes.string,
+    kudos: PropTypes.number
+  })
+}
+
 export default Header;
