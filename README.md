@@ -52,12 +52,19 @@ POST http://localhost:4200/api/kudos-logs
 - To Start the app
 ```
 cd client/
-npm start
+npm i && npm start
 ```
-- Copy paste following to */src/constants* to run the local server
+- To access users from each organization, follow these steps:
+  1. Go to `server/utils/constants`
+  2. Copy & paste any one of the organization ID i.e. *5e4c1717b923181523286e50*
+  3. To get all the users in that organization:
+    ```
+    GET {BASE_SERVER_API}/api/users/5e4c1717b923181523286e50/
+    ```
+- Copy paste following to */src/utils/constants* to run the local server
 ```
 {
-  "BASE_API": "http://loca;host:4200"
+  "BASE_API": "http://localhost:4200"
 }
 ```
 

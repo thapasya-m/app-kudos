@@ -23,7 +23,7 @@ app.use("/", router);
 app.use(function(req, res, next) {
   res.status(404);
   // default to plain-text. send()
-  res.send("Not found");
+  res.send("Requested API route not found");
 });
 
 const listener = app.listen(process.env.PORT, function() {
