@@ -54,7 +54,7 @@ POST http://localhost:4200/api/kudos-logs
 cd client/
 npm i && npm start
 ```
-- To access users from each organization, follow these steps:
+- To access all users from each organization, follow these steps:
   1. Go to `server/utils/constants`
   2. Copy & paste any one of the organization ID i.e. *5e4c1717b923181523286e50*
   3. To get all the users in that organization:
@@ -67,4 +67,10 @@ npm i && npm start
   "BASE_API": "http://localhost:4200"
 }
 ```
-
+- Sample user credential from each organization(to sign in)
+  1. username: Celestine_Bogan, 
+     password: QEarsM5XBLi83hE
+  2. username: Joanie22,
+     password: fNVNAZGEjP4W5uQ
+  3. username: Felicia68,
+     password: Asgu4OuJAc5aOdr
