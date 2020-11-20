@@ -72,5 +72,3 @@ npm i && npm start
      password: QEarsM5XBLi83hE
   2. username: Joanie22,
      password: fNVNAZGEjP4W5uQ
-  3. username: Felicia68,
-     password: Asgu4OuJAc5aOdr
